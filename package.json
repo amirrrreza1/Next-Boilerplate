@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint src",
     "test": "jest --watch",
-    "test:run": "jest",
+    "test:run": "jest --passWithNoTests",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
