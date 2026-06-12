@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Enterprise Boilerplate
+
+A highly opinionated, strictly typed, and heavily automated Next.js (App Router) starter template designed for modern, scalable web development. It emphasizes code quality, automated testing, design-system integration, and a flawless developer experience.
+
+## Features
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router) with [React](https://react.dev/)
+- **Language:** Strictly typed with [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (using native CSS config)
+- **Theming:** Custom, zero-dependency, SSR-safe Dark/Light mode context implementation (with FOUC prevention).
+- **Environment Safety:** Strict build-time and runtime environment variable validation using [Zod](https://zod.dev/) and `@t3-oss/env-nextjs`.
+- **Code Quality & Automation:**
+  - **ESLint:** Modern Flat Config (`eslint.config.mjs`) bypassing the Next.js CLI wrapper.
+  - **Prettier:** Code formatting with automatic Tailwind class sorting (`prettier-plugin-tailwindcss`).
+  - **Husky & Lint-Staged:** Lightning-fast pre-commit hooks to ensure only formatted, linted, and type-checked code is staged.
+  - **Commitlint:** Enforces Conventional Commits format (`feat:`, `fix:`, etc.) for a clean git history.
+- **Testing:** [Jest](https://jestjs.io/) and React Testing Library setup optimized for Next.js (SWC compiler).
+- **UI Laboratory:** [Storybook](https://storybook.js.org/) configured for isolated component development.
+- **CI/CD:** GitHub Actions pipeline running on Node 22 and `pnpm` v11 to automate linting and testing on every push.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone and Install
+
+Clone the repository to your local machine and install the dependencies. **This project strictly uses `pnpm`.**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repository-url> my-new-project
+cd my-new-project
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+_Note: Running pnpm install will download the exact package versions defined in the pnpm-lock.yaml file, ensuring a stable starting point._
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2\. Set Up Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy the example environment file and configure it:
 
-## Learn More
+`   cp .env.example .env   `
 
-To learn more about Next.js, take a look at the following resources:
+_(Ensure all variables match the schema defined in env.mjs)_
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3\. Start the Development Server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`   pnpm dev   `
 
-## Deploy on Vercel
+Navigate to http://localhost:3000 to see your application running.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Available Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command        | Description                                      |
+| -------------- | ------------------------------------------------ |
+| pnpm dev       | Starts the Next.js development server            |
+| pnpm build     | Validates env vars, type checks, builds for prod |
+| pnpm start     | Starts the production server                     |
+| pnpm lint      | Runs ESLint across the src folder                |
+| pnpm test      | Launches Jest in watch mode                      |
+| pnpm test:run  | Runs all Jest tests once (CI)                    |
+| pnpm storybook | Starts Storybook on port 6006                    |
+
+## How to Customize the Boilerplate
+
+### 1\. Modifying the Theme (Dark Mode)
+
+The theming engine is fully custom and lives in src/contexts/ThemeContext.tsx.
+
+- **To change colors:** Open src/app/globals.css. Modify the hex codes in the :root (light mode) and .dark blocks. Tailwind v4 will automatically pick up these changes.
+- **To change toggle behavior:** Modify src/components/ThemeToggle.tsx.
+
+### 2\. Adding Environment Variables
+
+Do not just add variables to your .env file! You must also declare them in the schema so TypeScript knows about them.
+
+1.  Open env.mjs in the root directory.
+2.  Add your variable to the server or client (prefixed with NEXT_PUBLIC\_) Zod schema.
+3.  Map the variable in the runtimeEnv object at the bottom of the file.
+4.  Import env from env.mjs anywhere in your app to use it with full autocomplete.
+
+### 3\. Adjusting Code Rules
+
+- **ESLint:** Edit eslint.config.mjs to add or remove JavaScript/TypeScript logic rules.
+- **Prettier:** Edit .prettierrc to change tab widths, quotes, or formatting preferences.
+
+### 4\. Git Hooks and Commits
+
+- If you want to change what happens before a commit, edit .husky/pre-commit.
+- Remember that commit messages must follow the standard: type: description (e.g., feat: added user login). If your commit fails, check this format!
+
+## How to Update the Dependencies
+
+Because this boilerplate commits the pnpm-lock.yaml file, it guarantees a perfectly stable baseline. However, as the ecosystem evolves (e.g., React 19, Next.js 17), you will eventually want to update the core tools.
+
+### For a Single Project
+
+If you cloned this for a new project and want the absolute latest features before you start coding:
+
+`   pnpm update --latest   `
+
+This forces pnpm to ignore the lockfile, fetch the newest versions of everything, and generate a new lockfile snapshot.
+
+### Maintaining the Core Boilerplate
+
+To keep the main boilerplate repository up to date over time:
+
+1.  Every 3-6 months, pull down your boilerplate repository.
+2.  Run pnpm update --latest.
+3.  Run pnpm test:run and pnpm lint to verify that no major framework updates broke your configuration.
+4.  Commit the updated package.json and pnpm-lock.yaml using: git commit -m "chore: updated dependencies to latest versions".
+5.  Push to GitHub.
