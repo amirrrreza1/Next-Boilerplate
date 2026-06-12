@@ -1,0 +1,16 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
+minimumReleaseAgeExclude:
+  - '@storybook/csf-plugin@10.4.4'
+  - '@storybook/nextjs-vite@10.4.4'
+  - '@storybook/react-dom-shim@10.4.4'
+  - '@storybook/react-vite@10.4.4'
+  - '@storybook/react@10.4.4'
+  - eslint-plugin-storybook@10.4.4
+packages:
+  - "."

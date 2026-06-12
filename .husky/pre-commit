@@ -1,0 +1,14 @@
+set -e
+
+echo "Starting pre-commit checks..."
+
+echo "Step 1: Formatting and Linting (Staged Files Only)..."
+pnpm dlx lint-staged
+
+echo "Step 2: Type checking..."
+pnpm exec tsc --noEmit
+
+echo "Step 3: Building Next.js project..."
+pnpm run build
+
+echo "All checks passed! Committing code..."
