@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('has title and theme toggle', async ({ page }) => {
+test('has title and welcome message', async ({ page }) => {
   await page.goto('/');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/NextJS Boilerplate/);
 
-  // Expect the theme toggle to be visible
-  const themeToggle = page.getByRole('button', { name: /toggle theme/i });
-  await expect(themeToggle).toBeVisible();
+  // Expect the welcome message to be visible
+  await expect(
+    page.getByText(/Welcome to Amirreza's NextJS Boilerplate/i)
+  ).toBeVisible();
 });
