@@ -16,7 +16,7 @@ A highly opinionated, strictly typed, and heavily automated Next.js (App Router)
   - **Commitlint:** Enforces Conventional Commits format (`feat:`, `fix:`, etc.) for a clean git history.
 - **Testing:** [Vitest](https://vitest.dev/) and React Testing Library setup with jsdom, optimized for Vite-powered Next.js projects.
 - **UI Laboratory:** [Storybook](https://storybook.js.org/) configured for isolated component development.
-- **CI/CD:** GitHub Actions pipeline running on Node 22 and `pnpm` v11 to automate linting and testing on every push.
+- **CI/CD:** GitHub Actions pipeline running on Node 22 and `pnpm` v11 to automate linting, type-checking, and testing on every push.
 
 ---
 
@@ -50,16 +50,17 @@ Navigate to http://localhost:3000 to see your application running.
 
 ## Available Scripts
 
-| Command        | Description                                      |
-| -------------- | ------------------------------------------------ |
-| pnpm dev       | Starts the Next.js development server            |
-| pnpm build     | Validates env vars, type checks, builds for prod |
-| pnpm start     | Starts the production server                     |
-| pnpm lint          | Runs ESLint across the src folder                |
-| pnpm test          | Launches Vitest in watch mode                    |
-| pnpm test:run      | Runs all Vitest tests once (CI)                  |
-| pnpm test:coverage | Runs tests with v8 code coverage                 |
-| pnpm storybook     | Starts Storybook on port 6006                    |
+| Command            | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| pnpm dev           | Starts the Next.js development server             |
+| pnpm build         | Validates env vars, type checks, builds for prod  |
+| pnpm start         | Starts the production server                      |
+| pnpm lint          | Runs ESLint across the src folder                 |
+| pnpm type-check    | Runs TypeScript type checking without emitting     |
+| pnpm test          | Launches Vitest in watch mode                     |
+| pnpm test:run      | Runs all Vitest tests once (CI)                   |
+| pnpm test:coverage | Runs tests with v8 code coverage                  |
+| pnpm storybook     | Starts Storybook on port 6006                     |
 
 ## How to Customize the Boilerplate
 
@@ -68,7 +69,7 @@ Navigate to http://localhost:3000 to see your application running.
 The theming engine is fully custom and lives in src/contexts/ThemeContext.tsx.
 
 - **To change colors:** Open src/app/globals.css. Modify the hex codes in the :root (light mode) and .dark blocks. Tailwind v4 will automatically pick up these changes.
-- **To change toggle behavior:** Modify src/components/ThemeToggle.tsx.
+- **To change toggle behavior:** Modify src/components/ThemeChanger.tsx.
 
 ### 2\. Adding Environment Variables
 
