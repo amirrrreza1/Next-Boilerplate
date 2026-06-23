@@ -51,8 +51,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setThemeState(savedTheme);
         applyTheme(savedTheme);
       } else {
-        applyTheme('dark');
-        setThemeState('dark');
+        // Match the FOUC prevention script: use system preference
+        const systemPrefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches;
+        const defaultTheme: ThemeMode = systemPrefersDark ? 'dark' : 'light';
+        setThemeState(defaultTheme);
+        applyTheme(defaultTheme);
       }
     });
   }, []);
