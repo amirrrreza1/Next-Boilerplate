@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 1. We explicitly request pnpm v11 to match your local machine's lockfile
       - name: Install pnpm
@@ -21,7 +21,7 @@ jobs:
 
       # 2. We MUST use Node 22 because pnpm v11 requires the node:sqlite module
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: 'pnpm'
