@@ -7,7 +7,6 @@ A highly opinionated, strictly typed, and heavily automated Next.js (App Router)
 - **Framework:** [Next.js](https://nextjs.org/) (App Router) with [React](https://react.dev/)
 - **Language:** Strictly typed with [TypeScript](https://www.typescriptlang.org/)
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (using native CSS config)
-- **Theming:** Custom, zero-dependency, SSR-safe Dark/Light mode context implementation (with FOUC prevention).
 - **Environment Safety:** Strict build-time and runtime environment variable validation using [Zod](https://zod.dev/) and `@t3-oss/env-nextjs`.
 - **Code Quality & Automation:**
   - **ESLint:** Modern Flat Config (`eslint.config.mjs`) bypassing the Next.js CLI wrapper.
@@ -50,28 +49,22 @@ Navigate to http://localhost:3000 to see your application running.
 
 ## Available Scripts
 
-| Command            | Description                                       |
-| ------------------ | ------------------------------------------------- |
-| pnpm dev           | Starts the Next.js development server             |
-| pnpm build         | Validates env vars, type checks, builds for prod  |
-| pnpm start         | Starts the production server                      |
-| pnpm lint          | Runs ESLint across the src folder                 |
-| pnpm type-check    | Runs TypeScript type checking without emitting     |
-| pnpm test          | Launches Vitest in watch mode                     |
-| pnpm test:run      | Runs all Vitest tests once (CI)                   |
-| pnpm test:coverage | Runs tests with v8 code coverage                  |
-| pnpm storybook     | Starts Storybook on port 6006                     |
+| Command            | Description                                      |
+| ------------------ | ------------------------------------------------ |
+| pnpm dev           | Starts the Next.js development server            |
+| pnpm build         | Validates env vars, type checks, builds for prod |
+| pnpm start         | Starts the production server                     |
+| pnpm lint          | Runs ESLint across the src folder                |
+| pnpm type-check    | Runs TypeScript type checking without emitting   |
+| pnpm test          | Launches Vitest in watch mode                    |
+| pnpm test:run      | Runs all Vitest tests once (CI)                  |
+| pnpm test:coverage | Runs tests with v8 code coverage                 |
+| pnpm test:e2e      | Runs Playwright E2E tests                        |
+| pnpm storybook     | Starts Storybook on port 6006                    |
 
 ## How to Customize the Boilerplate
 
-### 1\. Modifying the Theme (Dark Mode)
-
-The theming engine is fully custom and lives in src/contexts/ThemeContext.tsx.
-
-- **To change colors:** Open src/app/globals.css. Modify the hex codes in the :root (light mode) and .dark blocks. Tailwind v4 will automatically pick up these changes.
-- **To change toggle behavior:** Modify src/components/ThemeChanger.tsx.
-
-### 2\. Adding Environment Variables
+### 1\. Adding Environment Variables
 
 Do not just add variables to your .env file! You must also declare them in the schema so TypeScript knows about them.
 
@@ -80,12 +73,12 @@ Do not just add variables to your .env file! You must also declare them in the s
 3.  Map the variable in the runtimeEnv object at the bottom of the file.
 4.  Import env from env.mjs anywhere in your app to use it with full autocomplete.
 
-### 3\. Adjusting Code Rules
+### 2\. Adjusting Code Rules
 
 - **ESLint:** Edit eslint.config.mjs to add or remove JavaScript/TypeScript logic rules.
 - **Prettier:** Edit .prettierrc to change tab widths, quotes, or formatting preferences.
 
-### 4\. Git Hooks and Commits
+### 3\. Git Hooks and Commits
 
 - If you want to change what happens before a commit, edit .husky/pre-commit.
 - Remember that commit messages must follow the standard: type: description (e.g., feat: added user login). If your commit fails, check this format!
