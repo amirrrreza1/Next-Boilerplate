@@ -41,3 +41,11 @@ jobs:
       # 6. Run the Vitest testing suite
       - name: Run Tests
         run: pnpm run test:run
+
+      # 7. Install Playwright browsers (Chromium only for speed)
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      # 8. Run Playwright E2E Tests
+      - name: Run E2E Tests
+        run: pnpm run test:e2e
