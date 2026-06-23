@@ -61,6 +61,10 @@
     ],
     "*.{json,md,css}": [
       "prettier --write"
-    ]
-  }
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=11"
+  },
+  "packageManager": "pnpm@11.7.0"
 }
