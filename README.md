@@ -14,7 +14,7 @@ A highly opinionated, strictly typed, and heavily automated Next.js (App Router)
   - **Prettier:** Code formatting with automatic Tailwind class sorting (`prettier-plugin-tailwindcss`).
   - **Husky & Lint-Staged:** Lightning-fast pre-commit hooks to ensure only formatted, linted, and type-checked code is staged.
   - **Commitlint:** Enforces Conventional Commits format (`feat:`, `fix:`, etc.) for a clean git history.
-- **Testing:** [Jest](https://jestjs.io/) and React Testing Library setup optimized for Next.js (SWC compiler).
+- **Testing:** [Vitest](https://vitest.dev/) and React Testing Library setup with jsdom, optimized for Vite-powered Next.js projects.
 - **UI Laboratory:** [Storybook](https://storybook.js.org/) configured for isolated component development.
 - **CI/CD:** GitHub Actions pipeline running on Node 22 and `pnpm` v11 to automate linting and testing on every push.
 
@@ -55,10 +55,11 @@ Navigate to http://localhost:3000 to see your application running.
 | pnpm dev       | Starts the Next.js development server            |
 | pnpm build     | Validates env vars, type checks, builds for prod |
 | pnpm start     | Starts the production server                     |
-| pnpm lint      | Runs ESLint across the src folder                |
-| pnpm test      | Launches Jest in watch mode                      |
-| pnpm test:run  | Runs all Jest tests once (CI)                    |
-| pnpm storybook | Starts Storybook on port 6006                    |
+| pnpm lint          | Runs ESLint across the src folder                |
+| pnpm test          | Launches Vitest in watch mode                    |
+| pnpm test:run      | Runs all Vitest tests once (CI)                  |
+| pnpm test:coverage | Runs tests with v8 code coverage                 |
+| pnpm storybook     | Starts Storybook on port 6006                    |
 
 ## How to Customize the Boilerplate
 

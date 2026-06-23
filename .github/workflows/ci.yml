@@ -33,6 +33,7 @@ jobs:
       - name: Run Linter
         run: pnpm run lint
 
-      # 5. Run the Jest testing suite
+      # 5. Run the Vitest testing suite
       - name: Run Tests
         run: pnpm run test:run
+
