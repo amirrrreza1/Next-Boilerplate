@@ -13,17 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 1. We MUST use Node 22 because pnpm v11 requires the node:sqlite module
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      # 2. We explicitly request pnpm v11 to match your local machine's lockfile
+      # 1. We explicitly request pnpm v11 to match your local machine's lockfile
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 11
+
+      # 2. We MUST use Node 22 because pnpm v11 requires the node:sqlite module
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
 
       # 3. Install dependencies strictly using the lockfile
       - name: Install dependencies
@@ -33,7 +34,10 @@ jobs:
       - name: Run Linter
         run: pnpm run lint
 
-      # 5. Run the Vitest testing suite
+      # 5. Type-check the entire project
+      - name: Type Check
+        run: pnpm run type-check
+
+      # 6. Run the Vitest testing suite
       - name: Run Tests
         run: pnpm run test:run
-
