@@ -51,7 +51,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setThemeState(savedTheme);
         applyTheme(savedTheme);
       } else {
-        // Match the FOUC prevention script: use system preference
         const systemPrefersDark = window.matchMedia(
           '(prefers-color-scheme: dark)'
         ).matches;
@@ -75,7 +74,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
-      {/* The script is injected automatically by the Provider */}
       <script
         dangerouslySetInnerHTML={{ __html: themeScript }}
         suppressHydrationWarning
